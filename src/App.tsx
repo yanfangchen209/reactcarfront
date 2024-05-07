@@ -3,24 +3,30 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
-import Counter from './component/Counter'
 import { useEffect, useState } from 'react';
+import AddItemForm from './AddItemForm';
 
-import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
-import Repositories from './component/Repositories';
-const queryClient = new QueryClient();
-/** repositories are fetched using the React Query library. We also managed to handle request 
- * status easily using its built-in features. We don’t need any states to store response data 
- * because React Query handles data management and caching:By using React Query, we have to write 
- * less code to get proper error handling, data caching, and so on, due to the built-in functionalities
- *  that it provides. */
+//create a type for the shopping items, Item, which we will also export because we need it in other components later:
+export type Item = {
+  product: string;
+  amount: string;
+}
 function App() {
-
+  
+ const [items, setItems] = useState<Item[]>([]);
+  const addItem = (newItem: Item) => {
+    setItems([newItem, ...items]);
+  }
   return (
     <>
-      <QueryClientProvider client={queryClient}>
-        <Repositories/>
-      </QueryClientProvider>
+      <Container>
+        <AppBar position='static'>
+          <Typography variant='h6'>
+            Shopping List
+          </Typography>
+        </AppBar>
+        <AddItemForm addItem={addItem} />
+      </Container>
     
     </>
   );

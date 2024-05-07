@@ -11,13 +11,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <Container>
-    <AppBar position="static">
-      <Toolbar>
-        <Typography variant="h6">
-          Shopping List
-        </Typography>
-      </Toolbar>
-    </AppBar>
+    <App />
   </Container>
 );
 
