@@ -6,12 +6,26 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Carlist from './components/Carlist';
 import { AddCar } from './components/AddCar';
+import { useState } from 'react';
+import { Login } from './components/Login';
+
 
 
 
 const queryClient = new QueryClient();
 
 function App() {
+
+  const [isAuthenticated, setAuth] = useState(false);
+
+  const authenticationHandler = () => {
+    setAuth(true);
+  }
+
+  const logoutHandler = () => {
+    setAuth(false);
+  }
+  
   return (
     <Container maxWidth="xl">
       <CssBaseline />
@@ -20,11 +34,15 @@ function App() {
           <Typography variant="h6">
           Car shop
           </Typography>
+         {isAuthenticated && <div style={{ marginLeft: 'auto' }}>
+            <button onClick={logoutHandler}>Log out</button>
+          </div>}
         </Toolbar>
       </AppBar>
       <QueryClientProvider client={queryClient}>
-        <AddCar />
-        <Carlist />
+        {!isAuthenticated && <Login  authHandler={authenticationHandler}/>}
+        {isAuthenticated && <AddCar />}
+        {isAuthenticated && <Carlist />}
       </QueryClientProvider>
     </Container>
   )
