@@ -2,7 +2,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { getCars, deleteCar} from '../api/carapi';
 import { DataGrid, GridCellParams, GridColDef, GridToolbar} from '@mui/x-data-grid';
 import { useState } from 'react';
-import { Button, IconButton, Snackbar } from '@mui/material';
+import { IconButton, Snackbar } from '@mui/material';
 import { EditCar } from './EditCar';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Tooltip from '@mui/material/Tooltip';
